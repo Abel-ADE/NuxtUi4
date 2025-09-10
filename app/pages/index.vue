@@ -1,6 +1,6 @@
 import { default } from '../../.nuxt/ui/banner';
 <template>
-<div class="bg-default text-default">
+<div>
   Home
 </div>
 </template>

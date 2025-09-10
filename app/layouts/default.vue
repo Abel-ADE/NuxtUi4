@@ -8,9 +8,7 @@ import Header from '~/components/layouts/header.vue';
     <UApp>
         <Header />
         <UMain >
-            <template #default>
-                <slot />
-            </template>    
+            <slot />
         </UMain>
         <Footer />
     </UApp>
