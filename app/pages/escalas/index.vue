@@ -1,5 +1,3 @@
 <template>
-    <div>
-        Escalas
-    </div>
+    <UContainer> Escalas </UContainer>
 </template>

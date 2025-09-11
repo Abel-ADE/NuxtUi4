@@ -1,5 +1,4 @@
+import { UContainer } from '../../.nuxt/components';
 <template>
-  <div>
-    Home
-  </div>
+  <UContainer> Home </UContainer>
 </template>

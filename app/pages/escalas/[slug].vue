@@ -1,5 +1,6 @@
+import { UContainer } from '../../../.nuxt/components';
 <template>
-    <div>Escala {{ slug }}</div>
+    <UContainer>Escala {{ slug }}</UContainer>
 </template>
 
 <script setup lang="ts">
