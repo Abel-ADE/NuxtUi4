@@ -1,4 +1,3 @@
-import { UContainer, UPageBody } from '../../.nuxt/components';
 <template>
   <UContainer>
     <UPageCTA 
@@ -12,7 +11,6 @@ import { UContainer, UPageBody } from '../../.nuxt/components';
           <UPageCard v-for="(scale, index) in escalas" :key="index" v-bind="scale" />
         </UPageGrid>
       </section>
-      
     </UPageBody>
   </UContainer>
 </template>
@@ -29,7 +27,7 @@ const ctaLinks = ref<ButtonProps[]>([
   }
 ])
 
-const { data } = await useAsyncData<Scale[]>('escalas',
+const { data } = await useAsyncData<Scale[]>('featuredScales',
   () =>
     $fetch('https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/escalas?limit=6',
       {
