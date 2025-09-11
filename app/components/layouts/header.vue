@@ -22,12 +22,12 @@ import type { NavigationMenuItem } from '@nuxt/ui';
 const menuItems = ref<NavigationMenuItem[]>([
     {
         label: 'Inicio',
-        icon: 'ic:baseline-home',
+        icon: 'i-lucide-house',
         to: '/'
     },
     {
         label: 'Escalas',
-        icon: 'ic:baseline-local-hospital',
+        icon: 'i-lucide-hospital',
         to: '/escalas',
     }
 ])
