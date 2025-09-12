@@ -1,5 +1,4 @@
 <template>
-    <UContainer>
     <UPageBody>
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas de Enfermería</h2>
@@ -8,7 +7,6 @@
         </UPageGrid>
       </section>
     </UPageBody>
-  </UContainer>
 </template>
 
 <script setup lang="ts">
