@@ -1,4 +1,6 @@
 <template>
+  <UContainer>
+    <UBreadcrumb class="py-4" :items="breadcrumItems"/>
     <UPageBody>
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas de Enfermería</h2>
@@ -7,6 +9,7 @@
         </UPageGrid>
       </section>
     </UPageBody>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
@@ -30,4 +33,17 @@ const escalas = data.value?.map((escala) => {
     to: 'escalas/'+escala.slug
   }
 })
+
+const breadcrumItems = [
+    {
+        label: 'Inicio',
+        icon: 'i-lucide-house',
+        to: '/'
+    },
+    {
+        label: 'Escalas',
+        icon: 'i-lucide-hospital',
+        to: '/escalas',
+    }
+]
 </script>

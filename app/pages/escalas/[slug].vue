@@ -1,7 +1,10 @@
 <template>
-        <UPageBody>
-            <UPageCTA :title="data?.name" :description="data?.description"/>
-        </UPageBody>
+  <UContainer>
+    <UBreadcrumb class="py-4" :items="breadcrumItems"/>
+    <UPageBody>
+      <UPageCTA :title="data?.name" :description="data?.description"/>
+    </UPageBody>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
@@ -19,5 +22,23 @@ const { data } = await useAsyncData<Scale>(`${slug.value}`,
         }
       })
 )
+
+const breadcrumItems = [
+    {
+        label: 'Inicio',
+        icon: 'i-lucide-house',
+        to: '/'
+    },
+    {
+        label: 'Escalas',
+        icon: 'i-lucide-hospital',
+        to: '/escalas',
+    },
+    {
+        label: data.value?.name,
+        icon: 'i-lucide-clipboard-plus',
+        to: '/escalas/'+data.value?.slug,
+    }
+]
 
 </script>

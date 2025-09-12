@@ -1,9 +1,10 @@
 <template>
+  <UContainer>
     <UPageBody>
       <UPageCTA 
       title="Todas las escalas de enfermería en una sola web"
       description="Las escalas de enfermería son una gran herramienta a la hora de hacer un buen análisis clínico, descúbre la gran variedad que te ofrece esta página y pasa al siguiente nivel"
-      variant="naked" :links="ctaLinks" />
+      variant="soft" :links="ctaLinks" />
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas destacadas</h2>
         <UPageGrid>
@@ -11,6 +12,7 @@
         </UPageGrid>
       </section>
     </UPageBody>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
