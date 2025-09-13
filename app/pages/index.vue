@@ -8,7 +8,7 @@
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas destacadas</h2>
         <UPageGrid>
-          <UPageCard v-for="(scale, index) in escalas" :key="index" v-bind="scale" />
+          <UPageCard v-for="scale in escalas" :key="scale.id" :title="scale.name" :description="scale.description" :to="'escalas/'+scale.slug"/>
         </UPageGrid>
       </section>
     </UPageBody>
@@ -27,7 +27,7 @@ const ctaLinks = ref<ButtonProps[]>([
   }
 ])
 
-const { data } = await useAsyncData<Scale[]>('featuredScales',
+const { data: escalas } = await useAsyncData<Scale[]>('featuredScales',
   () =>
     $fetch('https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/scales?limit=6',
       {
@@ -36,12 +36,4 @@ const { data } = await useAsyncData<Scale[]>('featuredScales',
         }
       })
 )
-
-const escalas = data.value?.map((escala) => {
-  return {
-    title: escala.name,
-    description: escala.description,
-    to: 'escalas/'+escala.slug
-  }
-})
 </script>

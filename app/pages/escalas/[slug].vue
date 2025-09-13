@@ -9,12 +9,13 @@
       variant="soft"
       :ui="{container: 'p-4 sm:p-4 lg:p-8'}"/>
 
-      <p>{{'Question: '+ actualQuestion }} </p>
-      <p>{{'Select: '+ value }} </p>
-      {{ responses }}
-
+      <!-- Para depuración -->
+      <!-- {{'Question: '+ actualQuestion }} <br>
+      {{'Select: '+ valueQuestion }} <br>
+      {{ responses }} <br>
+      {{ 'Resultado: '+result }} -->
       <!-- Stepper -->
-      <UStepper ref="stepper" :items="preguntas!">
+      <UStepper ref="stepper" :items="preguntas!"  :ui="{description: 'hidden', title: 'hidden sm:block'}" :disabled="true">
       <template #content="{ item }">
         <UCard class="mt-4">
           <template #header>
@@ -22,7 +23,7 @@
             <p>{{ item.description }}</p>
           </template>
           <template #default>
-            <URadioGroup v-model="value" :items="item.responses" />
+            <URadioGroup v-model="valueQuestion" :items="item.responses" />
           </template>
         </UCard>
       </template>
@@ -33,16 +34,17 @@
       <UButton
         leading-icon="i-lucide-arrow-left"
         :disabled="!stepper?.hasPrev"
-        @click="stepper?.prev(), value=0, actualQuestion--"
+        @click="stepper?.prev(), valueQuestion=0, actualQuestion--"
       >
         Prev
       </UButton>
 
       <UButton
         trailing-icon="i-lucide-arrow-right"
+        :disabled="actualQuestion === responses.length"
         @click="
-        responses.push({questionId: actualQuestion, value: value}),
-        value=0, 
+        responses.push({questionId: actualQuestion, value: valueQuestion}),
+        valueQuestion=0, 
         stepper?.next(),
         (actualQuestion < preguntas!.length) ? actualQuestion++ :''
         "
@@ -64,10 +66,19 @@ const route = useRoute();
 const slug = computed(() => route.params.slug);
 
 //Para obtener el valor de la escala
-const value = ref(0);
+const valueQuestion = ref(0);
 const actualQuestion = ref(1);
 const responses = ref<Responses[]>([
 ]);
+
+watch(actualQuestion, (newQuestion) => {
+  const val = responses.value.find((response) => response.questionId === newQuestion)?.value;
+  valueQuestion.value = val || 0;
+})
+
+const result = computed(() => {
+  return responses.value.map((res) => res.value).reduce((accum , currentVal) => accum + currentVal,0);
+})
 
 interface Responses {
   questionId: number,

@@ -5,7 +5,7 @@
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas de Enfermería</h2>
         <UPageGrid>
-          <UPageCard v-for="scale in escalas" :key="scale.id" v-bind="scale" />
+          <UPageCard v-for="scale in escalas" :key="scale.id" :title="scale.name" :description="scale.description" :to="'escalas/'+scale.slug"/>
         </UPageGrid>
       </section>
     </UPageBody>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type { Scale } from '~/interfaces/scales';
 
-const { data } = await useAsyncData<Scale[]>('allScales',
+const { data: escalas } = await useAsyncData<Scale[]>('allScales',
   () =>
     $fetch('https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/scales',
       {
@@ -24,15 +24,6 @@ const { data } = await useAsyncData<Scale[]>('allScales',
         }
       })
 )
-
-const escalas = data.value?.map((escala) => {
-  return {
-    id: escala.id,
-    title: escala.name,
-    description: escala.description,
-    to: 'escalas/'+escala.slug
-  }
-})
 
 const breadcrumItems = [
     {
