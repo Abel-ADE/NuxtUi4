@@ -29,7 +29,7 @@ const ctaLinks = ref<ButtonProps[]>([
 
 const { data } = await useAsyncData<Scale[]>('featuredScales',
   () =>
-    $fetch('https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/escalas?limit=6',
+    $fetch('https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/scales?limit=6',
       {
         headers: {
           'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53dHpicW90dnNlanVpY2F0cnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwODE4MTMsImV4cCI6MjA3MjY1NzgxM30.Dhf8n6f3rlrTDNu3CPQt-gZbq9zlDIofH58pykaHLpY'
