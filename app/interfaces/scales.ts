@@ -30,3 +30,8 @@ export interface Interpretation {
   max: number,
   conclusion: string,
 }
+
+export interface ResponsesScale {
+  questionId: number,
+  value: number,
+}

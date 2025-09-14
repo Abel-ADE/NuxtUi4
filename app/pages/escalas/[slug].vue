@@ -9,13 +9,21 @@
       variant="soft"
       :ui="{container: 'p-4 sm:p-4 lg:p-8'}"/>
 
-      <!-- Para depuración -->
-      <!-- {{'Question: '+ actualQuestion }} <br>
+      {{'Question: '+ idQuestion }} <br>
       {{'Select: '+ valueQuestion }} <br>
       {{ responses }} <br>
-      {{ 'Resultado: '+result }} -->
+      {{ 'Resultado: '+result }}
+      
+      
       <!-- Stepper -->
-      <UStepper ref="stepper" :items="preguntas!"  :ui="{description: 'hidden', title: 'hidden sm:block'}" :disabled="true">
+      <UStepper 
+      ref="stepper" 
+      :items="preguntas!"  
+      :ui="{description: 'hidden', title: 'hidden sm:block'}" 
+      :disabled="true"
+      @next="nextScale()"
+      @prev="prevScale()">
+
       <template #content="{ item }">
         <UCard class="mt-4">
           <template #header>
@@ -27,6 +35,7 @@
           </template>
         </UCard>
       </template>
+
     </UStepper>
 
     <!-- Buttons Stepper -->
@@ -34,20 +43,15 @@
       <UButton
         leading-icon="i-lucide-arrow-left"
         :disabled="!stepper?.hasPrev"
-        @click="stepper?.prev(), valueQuestion=0, actualQuestion--"
+        @click="stepper?.prev()"
       >
         Prev
       </UButton>
 
       <UButton
         trailing-icon="i-lucide-arrow-right"
-        :disabled="actualQuestion === responses.length"
-        @click="
-        responses.push({questionId: actualQuestion, value: valueQuestion}),
-        valueQuestion=0, 
-        stepper?.next(),
-        (actualQuestion < preguntas!.length) ? actualQuestion++ :''
-        "
+        :disabled="idQuestion === preguntas!.length"
+        @click="stepper?.next()"
       >
         Next
       </UButton>
@@ -58,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Question, Scale } from '~/interfaces/scales';
+import type { Question, ResponsesScale, Scale } from '~/interfaces/scales';
 
 //Definición de variables
 const stepper = useTemplateRef('stepper');
@@ -67,12 +71,21 @@ const slug = computed(() => route.params.slug);
 
 //Para obtener el valor de la escala
 const valueQuestion = ref(0);
-const actualQuestion = ref(1);
-const responses = ref<Responses[]>([
-]);
+const idQuestion = ref(1);
+const response = computed<ResponsesScale>(() => {
+  return {
+    questionId: idQuestion.value,
+    value: valueQuestion.value,
+  }
+})
+const responses = ref<ResponsesScale[]>([]);
 
-watch(actualQuestion, (newQuestion) => {
-  const val = responses.value.find((response) => response.questionId === newQuestion)?.value;
+watch(idQuestion, (newQuestion) => {
+  const question = responses.value.find((response) => response.questionId === newQuestion);
+  const val = question?.value;  
+  if(val !== 0){
+    responses.value = responses.value.filter((res) => res.questionId !== idQuestion.value);
+  }
   valueQuestion.value = val || 0;
 })
 
@@ -80,9 +93,13 @@ const result = computed(() => {
   return responses.value.map((res) => res.value).reduce((accum , currentVal) => accum + currentVal,0);
 })
 
-interface Responses {
-  questionId: number,
-  value: number,
+const nextScale = () => {  
+  responses.value.push(response.value);
+  idQuestion.value++;
+}
+
+const prevScale = () => {
+  idQuestion.value--;  
 }
 
 
