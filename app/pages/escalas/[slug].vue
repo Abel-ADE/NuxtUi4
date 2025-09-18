@@ -206,6 +206,4 @@ onMounted(() => {
   window.addEventListener('resize', handleResize);
   handleResize();
 });
-
-watch(widthScreen,() => console.log(widthScreen.value))
 </script>
