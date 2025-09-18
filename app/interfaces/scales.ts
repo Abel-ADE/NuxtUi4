@@ -34,9 +34,9 @@ export interface Interpretation {
 
 export interface Category {
   id: number;
-  name: string;
-  icon: string;
-  color: string;
+  category_name: string;
+  category_icon: string;
+  category_color: string;
 }
 
 export interface Categories_Scale{

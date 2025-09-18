@@ -14,13 +14,13 @@
                 <UBadge 
                 v-for="{categories} in scale.categories_scales" 
                 :key="categories.id" 
-                :ui="{base:`text-${categories.color}-500 bg-${categories.color}-50`}"
+                :ui="{base:`text-${categories.category_color}-500 bg-${categories.category_color}-50`}"
                 size="md" 
                 variant="soft">
                   <template #leading>
-                    <UIcon :name="'i-lucide:'+categories.icon"/>
+                    <UIcon :name="'i-lucide:'+categories.category_icon"/>
                   </template>
-                    {{ categories.name }}
+                    {{ categories.category_name }}
                 </UBadge>
             </template>
           </UPageCard>
