@@ -14,7 +14,7 @@
             <UButton label="Ver escalas" to="/escalas" size="lg" />
           </div>
       </section>
-      <EscalasGrid title="Escalas destacadas" heading="h2" :limit="6" />
+      <EscalasGrid title="Escalas destacadas" heading="h2" :limit="3" />
     </UPageBody>
   </UContainer>
 </template>

@@ -6,7 +6,7 @@
       <UPageCTA 
       :title="scale?.name"
       :description="scale?.description"
-      variant="soft"
+      variant="naked"
       :ui="{container: 'p-4 sm:p-4 lg:p-8'}"/>
 
        <!-- Respuestas: {{responses }} <br>
@@ -24,6 +24,7 @@
       :ui="{description: 'hidden', title: 'hidden sm:block'}" 
       :disabled="true"
       :linear=true
+      :size="sizeStepper"
       @next="stepperNext()"
       @prev="stepperPrev()"
       >
@@ -56,6 +57,7 @@
 
       <UButton 
       v-if="isAnswered"
+      :disabled="valueQuestion !== 0"
       @click="showResult = true">
           Finalizar
       </UButton>
@@ -74,7 +76,7 @@
      <div v-if="showResult">
       <UTabs :items="[{label:'Resultado', slot:'resultTab' as const},{label:'Escala de valores', slot:'scaleTab' as const}]" :unmount-on-hide="false" variant="link" class="w-full">
         <template #resultTab>
-          <div class="min-h-80 flex flex-col gap-2 items-center justify-center rounded-lg bg-neutral-100 dark:bg-elevated/50">
+          <div class="min-h-80 flex flex-col gap-2 items-center justify-center text-center rounded-lg bg-neutral-100 dark:bg-elevated/50">
             <h3 class="text-6xl font-bold">{{ result }}</h3>
             <p class="text-3xl">{{ conclusion }}</p>
           </div>
@@ -187,5 +189,23 @@ const { data: interpretations } = await useAsyncData<Interpretation[]>(`Interpre
       })
 )
 
+//Para hacer el stepper más responsive
+const widthScreen = ref(0);
 
+const handleResize = () => {
+  widthScreen.value = window.innerWidth;
+}
+
+const sizeStepper = computed(() => {
+  if(widthScreen.value >= 768) return 'md';
+  if(widthScreen.value >= 640) return 'sm';
+  return 'xs';
+})
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+  handleResize();
+});
+
+watch(widthScreen,() => console.log(widthScreen.value))
 </script>

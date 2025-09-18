@@ -5,7 +5,7 @@
             <slot />
             <UButton 
             icon="i-lucide-arrow-up" 
-            class="fixed md:right-8 right-4 bottom-8"
+            class="fixed right-4 bottom-4"
             onclick="window.scrollTo(0, 0)"/>
         </UMain>
         <Footer />

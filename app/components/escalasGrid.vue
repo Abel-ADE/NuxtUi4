@@ -12,7 +12,7 @@
         <UPageGrid>
             <UPageCard 
             v-for="scale in escalasMostradas" :key="scale.id" :title="scale.name" :description="scale.description"
-                :to="'escalas/' + scale.slug" variant="ghost" :ui="{container:'shadow-lg rounded-lg dark:border-solid dark:border-gray-700 dark:border-2'}">
+                :to="'escalas/' + scale.slug" variant="subtle" :ui="{container:'shadow-lg rounded-lg dark:border-solid dark:border-gray-700 dark:border-2'}">
                 <template #header>
                     <div class="flex gap-2">
                         <UBadge 
@@ -65,7 +65,7 @@ const escalasFiltradas = computed(() => {
 }) 
 
 
-const { data: escalas } = await useAsyncData<Scale[]>(`allScales`,
+const { data: escalas } = await useAsyncData<Scale[]>(`allScales-limit-${props.limit}`,
     () =>
         $fetch(`https://nwtzbqotvsejuicatrzm.supabase.co/rest/v1/scales?select=*,categories_scales(id, id_scale, categories(*))&${limitUrl.value}`,
             {
