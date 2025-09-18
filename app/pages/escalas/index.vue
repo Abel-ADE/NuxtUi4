@@ -5,24 +5,26 @@
       <section class="flex flex-col gap-10">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">
           Escalas de Enfermería</h2>
-        <div class="flex gap-4">
-          <USelectMenu v-model="selected" :items="categorias" value-key="id" label-key="category_name" placeholder="Categoría" :search-input="{placeholder:'Buscar...'}" :ui="{base: 'w-full'}" />
-          <UButton label="Borrar filtros" icon="i-lucide-funnel-x" @click="selected = undefined"/>
+        <div class="flex gap-4 justify-end">
+          <USelect v-model="selected" :items="categorias" value-key="id" label-key="category_name" placeholder="Categoría" color="neutral" :ui="{base: 'w-[10rem]'}" />
+          <UButton color="primary" label="Borrar filtros" icon="i-lucide-funnel-x" @click="selected = undefined"/>
         </div>
         <UPageGrid>
           <UPageCard 
           v-for="scale in escalasMostradas" :key="scale.id" :title="scale.name" :description="scale.description"
             :to="'escalas/' + scale.slug" :highlight="true" highlight-color="neutral">
             <template #header>
-              <UBadge 
-              v-for="{ categories } in scale.categories_scales" :key="categories.id"
-                :ui="{ base: `text-${categories.category_color}-500 bg-${categories.category_color}-50` }" size="md"
-                variant="soft">
-                <template #leading>
-                  <UIcon :name="'i-lucide:' + categories.category_icon" />
-                </template>
-                {{ categories.category_name }}
-              </UBadge>
+             <div class="flex gap-2">
+                <UBadge 
+                v-for="{ categories } in scale.categories_scales" :key="categories.id"
+                  :ui="{ base: `text-${categories.category_color}-500 bg-${categories.category_color}-50` }" size="md"
+                  variant="soft">
+                  <template #leading>
+                    <UIcon :name="'i-lucide:' + categories.category_icon" />
+                  </template>
+                  {{ categories.category_name }}
+                </UBadge>
+              </div>
             </template>
           </UPageCard>
         </UPageGrid>
@@ -32,6 +34,7 @@
 </template>
 
 <script setup lang="ts">
+import type { BreadcrumbItem } from '@nuxt/ui';
 import type { Category, Scale } from '~/interfaces/scales';
 
 const selected = ref<number>();
@@ -73,7 +76,7 @@ const { data: categorias } = await useAsyncData<Category[]>('categories',
       })
 )
 
-const breadcrumItems = [
+const breadcrumItems: BreadcrumbItem[] = [
   {
     label: 'Inicio',
     icon: 'i-lucide-house',

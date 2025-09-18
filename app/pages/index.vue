@@ -3,25 +3,27 @@
     <UPageBody>
       <UPageCTA 
       title="Todas las escalas de enfermería en una sola web"
-      description="Las escalas de enfermería son una gran herramienta a la hora de hacer un buen análisis clínico, descúbre la gran variedad que te ofrece esta página y pasa al siguiente nivel"
-      variant="soft" :links="ctaLinks"
-      :ui="{container: 'p-8 sm:p-8 lg:p-16'}" />
+        description="Las escalas de enfermería son una gran herramienta a la hora de hacer un buen análisis clínico, descúbre la gran variedad que te ofrece esta página y pasa al siguiente nivel"
+        variant="soft" :links="ctaLinks" :ui="{ container: 'p-8 sm:p-8 lg:p-16' }" />
       <section class="flex flex-col gap-10">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Escalas destacadas</h2>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">
+          Escalas destacadas</h2>
         <UPageGrid>
-          <UPageCard v-for="scale in escalas" :key="scale.id" :title="scale.name" :description="scale.description" :to="'escalas/'+scale.slug" :highlight="true" highlight-color="neutral" >
+          <UPageCard 
+          v-for="scale in escalas" :key="scale.id" :title="scale.name" :description="scale.description"
+            :to="'escalas/' + scale.slug" :highlight="true" highlight-color="neutral">
             <template #header>
+              <div class="flex gap-2">
                 <UBadge 
-                v-for="{categories} in scale.categories_scales" 
-                :key="categories.id" 
-                :ui="{base:`text-${categories.category_color}-500 bg-${categories.category_color}-50`}"
-                size="md" 
-                variant="soft">
+                v-for="{ categories } in scale.categories_scales" :key="categories.id"
+                  :ui="{ base: `text-${categories.category_color}-500 bg-${categories.category_color}-50` }" size="md"
+                  variant="soft">
                   <template #leading>
-                    <UIcon :name="'i-lucide:'+categories.category_icon"/>
+                    <UIcon :name="'i-lucide:' + categories.category_icon" />
                   </template>
-                    {{ categories.category_name }}
+                  {{ categories.category_name }}
                 </UBadge>
+              </div>
             </template>
           </UPageCard>
         </UPageGrid>
