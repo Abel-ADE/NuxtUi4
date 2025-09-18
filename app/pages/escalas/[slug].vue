@@ -57,7 +57,7 @@
 
       <UButton 
       v-if="isAnswered"
-      :disabled="valueQuestion !== 0"
+      :disabled="valueQuestion === 0 || valueQuestion === undefined"
       @click="showResult = true">
           Finalizar
       </UButton>
