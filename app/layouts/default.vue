@@ -9,8 +9,9 @@
         onclick="window.scrollTo(0, 0)"
       />
     </UMain>
-    <SpeedInsights />
     <Footer />
+    <SpeedInsights />
+    <Analytics />
   </UApp>
 </template>
 
@@ -18,4 +19,5 @@
 import Footer from "~/components/layouts/footer.vue";
 import Header from "~/components/layouts/header.vue";
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
+import { Analytics } from "@vercel/analytics/nuxt";
 </script>
