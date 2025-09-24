@@ -8,8 +8,8 @@
         class="fixed right-4 bottom-4"
         onclick="window.scrollTo(0, 0)"
       />
-      <SpeedInsights />
     </UMain>
+    <SpeedInsights />
     <Footer />
   </UApp>
 </template>
