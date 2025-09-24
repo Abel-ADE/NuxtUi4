@@ -39,8 +39,8 @@ export interface Category {
   category_color: string;
 }
 
-export interface Categories_Scale{
-  id: number,
+export interface Categories_Scale {
+  id: number;
   id_scale?: number;
   id_category?: number;
   categories: Category;
@@ -48,5 +48,5 @@ export interface Categories_Scale{
 
 export interface ResponsesScale {
   questionId: number;
-  value: number;
+  value: number | undefined;
 }
