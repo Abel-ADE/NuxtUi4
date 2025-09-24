@@ -49,7 +49,7 @@
           :disabled="!stepper?.hasPrev"
           @click="stepper?.prev()"
         >
-          Prev
+          Anterior
         </UButton>
 
         <UButton
@@ -66,14 +66,14 @@
           :disabled="valueQuestion === undefined"
           @click="stepper?.next()"
         >
-          Next
+          Siguiente
         </UButton>
       </div>
 
       <!-- Mostrando los resultados -->
       <div v-if="showResult">
         <UTabs
-          :items="[{label:'Resultado', slot:'resultTab' as const},{label:'Escala de valores', slot:'scaleTab' as const}]"
+          :items="[{ label: 'Resultado', slot: 'resultTab' as const }, { label: 'Escala de valores', slot: 'scaleTab' as const }]"
           :unmount-on-hide="false"
           variant="link"
           class="w-full"

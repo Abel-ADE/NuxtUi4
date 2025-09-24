@@ -9,7 +9,10 @@
         onclick="window.scrollTo(0, 0)"
       />
     </UMain>
+    <!-- Trampa colores -->
+    <ColoresImportados />
     <Footer />
+    <!-- Importaciones de despliege -->
     <SpeedInsights />
     <Analytics />
   </UApp>
